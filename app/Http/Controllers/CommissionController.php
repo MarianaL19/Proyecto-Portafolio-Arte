@@ -79,6 +79,13 @@ class CommissionController extends Controller
      */
     public function update(Request $request, Commission $commission)
     {
+        $request->validate([
+            'title' => 'required|max:100',
+            'type' => 'required',
+            'info' => 'required|max:255',
+            'price' => 'required|min:1',
+        ]);
+        
         // $commission = new Commission();
         $commission->title = $request->title;
         $commission->type = $request->type;
