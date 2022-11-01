@@ -7,7 +7,7 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="active" href="index.html">Home</a></li>
+          <li><a class="active" href=#>Home</a></li>
           <li><a href="/commission">Comisiones</a></li>
           <!-- <li><a href="resume.html">Resume</a></li> -->
           <!-- <li><a href="services.html">Services</a></li>

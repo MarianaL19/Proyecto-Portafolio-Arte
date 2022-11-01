@@ -13,7 +13,15 @@
             <i>{{ $message }}</i><br>
         @enderror
         <label for="type">Tipo</label>
-        <input type="text" name="type" id="type" value={{ $type ?? old('type') }}>
+        <!-- <input type="text" name="type" id="type" value={{ $type ?? old('type') }}> -->
+        <select name="type" id="type">
+            <!-- Falta añadir la validación old -->
+            <option value="perfil">Perfil</option>
+            <option value="busto" >Busto</option>
+            <option value="medio">Medio Cuerpo</option>
+            <option value="full">Cuerpo Completo</option>
+            <option value="escena">Escena</option>
+        </select>
         <br>
         @error('info')
             <i>{{ $message }}</i><br>

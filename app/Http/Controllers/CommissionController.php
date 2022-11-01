@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Commission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommissionController extends Controller
 {
@@ -14,7 +15,11 @@ class CommissionController extends Controller
      */
     public function index()
     {
-        $commissions = Commission::all();
+        // $commissions = Commission::all();
+        
+        //Solo mostrar las comisiones propias del usuario Logeado
+        // $commissions = Commission::where('user_id', Auth::id())->get();
+        $commissions = Auth::user()->commissions;
         return view('commissions.commissionsIndex', compact('commissions'));
     }
 
@@ -43,6 +48,12 @@ class CommissionController extends Controller
             'price' => 'required|min:1',
         ]);
 
+        //Aunque no lo reciba por el formulario, se lo asignamos con "merge"
+        $request->merge(['user_id' => Auth::id()]);
+        // if($request->type == 'perfil'){
+        //     $price = 10;
+        // }
+        // $request->price = $price;
         Commission::create($request->all());
         
         return redirect('/commission');

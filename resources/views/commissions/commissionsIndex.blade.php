@@ -1,11 +1,11 @@
 
 <x-plantilla titulo="Listado de Comisiones">
-    
+    <h2>Usuario: {{ \Auth::user()->name }} - {{ auth()->user()->email }}</h2>
     <a href="/commission/create">Crear nueva comisión</a>
-
     <table border="1">
         <tr>
             <th>Título</th>
+            <th>Cliente</th>
             <th>Tipo</th>
             <th>Descripción</th>
             <th>Precio</th>
@@ -18,6 +18,7 @@
                         {{ $commission->title }}
                     </a>
                 </td>
+                <td>{{ $commission->user->name }}</td>
                 <td>{{ $commission->type }}</td>
                 <td>{{ $commission->info }}</td>
                 <td>{{ $commission->price }}</td>
