@@ -1,7 +1,3 @@
-<div>
-    <!-- Well begun is half done. - Aristotle -->
-</div>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,17 +9,35 @@
 
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    
-    <!-- Archivos principales de JS y CSS -->
-    @vite(['resources/css/style.css','resources/js/main.js'])
+
+    <!-- Archivos principales de CSS -->
+    @vite(['resources/css/style.css',
+    'resources/vendor/bootstrap/css/bootstrap.min.css',
+    'resources/vendor/bootstrap-icons/bootstrap-icons.css',
+    'resources/vendor/boxicons/css/boxicons.min.css',
+    'resources/vendor/glightbox/css/glightbox.min.css',
+    'resources/vendor/swiper/swiper-bundle.min.css',
+    ])
+
 </head>
 
 <body>
     <x-header/>
     <h1> {{ $titulo }} </h1>
     {{ $slot }}
-    <br><br><br><br>
     <x-footer/>
+
+    <!-- Recursos de JS -->
+    <script src="/js/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/js/vendor/aos/aos.js"></script>
+    <script src="/js/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/js/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/js/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/js/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="/js/vendor/php-email-form/validate.js"></script>
+
+    <script src="/js/vendor/main.js"></script>
 </body>
 
 </html>

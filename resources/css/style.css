@@ -1308,3 +1308,7 @@ section {
 #footer .credits a {
   color: #34b7a7;
 }
+
+.table-responsive {
+  max-height:300px;
+}

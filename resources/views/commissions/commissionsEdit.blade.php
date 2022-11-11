@@ -1,5 +1,5 @@
 <x-plantilla titulo="Editar comisión">
-
+    <div class="my-5 py-2 mx-5" >
     <form action="/commission/{{ $commission->id }}" method="post">
         @csrf
         @method('PATCH')
@@ -33,4 +33,5 @@
         <br>
         <input type="submit" value="Actualizar">
     </form>
+    </div>
 </x-plantilla>
