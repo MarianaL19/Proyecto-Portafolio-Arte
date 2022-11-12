@@ -41,12 +41,27 @@ class CommissionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:100',
+        // $request->validate([
+        //     'title' => 'required|max:100',
+        //     'type' => 'required',
+        //     'info' => 'required|max:255',
+        //     'price' => 'required|min:1',
+        // ]);
+
+        $rules = [
+            'title' => 'required|min:3|max:100',
             'type' => 'required',
-            'info' => 'required|max:255',
-            'price' => 'required|min:1',
-        ]);
+            'info' => 'required|min:5|max:255',
+            'price' => 'required|min:1|max:100',
+        ];
+        $customMessages = [
+            'title.required' => 'El campo de nombre no se admite vacío',
+            'info.required' => 'Es necesario que agregues una descripción',
+            'price.required' => 'Añade valores entre 1 y 100',
+        ];
+        $validatedData = $request->validate($rules, $customMessages);
+
+
 
         //Aunque no lo reciba por el formulario, se lo asignamos con "merge"
         $request->merge(['user_id' => Auth::id()]);

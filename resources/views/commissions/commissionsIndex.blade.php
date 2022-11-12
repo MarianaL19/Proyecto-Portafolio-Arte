@@ -1,15 +1,20 @@
 
 <x-plantilla titulo="Listado de Comisiones">
     <div class="my-5 py-2 mx-5" >
-        <h2>Usuario: {{ \Auth::user()->name }} - {{ auth()->user()->email }}</h2>
-        <a href="/commission/create">Crear nueva comisión</a>
+        <!-- <h2>Usuario: {{ \Auth::user()->name }} - {{ auth()->user()->email }}</h2> -->
+        <h2 class="text-center">Mis comisiones</h2>
+        <div class="mt-4 mb-3">
+            <button type="button" class="btn btn-primary rounded py-3 px-4" style="background-color:#34B7A7; border-color:#34B7A7;">
+                <a href="/commission/create" class="text-decoration-none text-white">Pedir otra comisión</a>
+            </button>
+        </div>
 
         <div class="table-responsive">
             <table class="table table-hover  align-middle">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Título</th>
-                        <th scope="col">Cliente</th>
+                        <!-- <th scope="col">Cliente</th> -->
                         <th scope="col">Tipo</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Precio</th>
@@ -22,17 +27,17 @@
                 <tbody>
                     <tr>
                         <td>
-                            <a href="/commission/{{ $commission->id }}">
+                            <a href="/commission/{{ $commission->id }}"  class="text-decoration-none">
                                 {{ $commission->title }}
                             </a>
                         </td>
-                        <td>{{ $commission->user->name }}</td>
+                        <!-- <td>{{ $commission->user->name }}</td> -->
                         <td>{{ $commission->type }}</td>
                         <td>{{ $commission->info }}</td>
                         <td>{{ $commission->price }}</td>
                         <td>{{ $commission->commercial }}</td>
                         <td>
-                            <a href="/commission/{{ $commission->id }}/edit">Editar</a>
+                            <a href="/commission/{{ $commission->id }}/edit" class="text-decoration-none">Editar</a>
                         </td>
                         <td>
                             <a href="">
