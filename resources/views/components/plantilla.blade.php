@@ -9,7 +9,7 @@
 
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+    <script src="https://kit.fontawesome.com/d2400a49aa.js" crossorigin="anonymous"></script>
     <!-- Archivos principales de CSS -->
     @vite(['resources/css/style.css',
     'resources/vendor/bootstrap/css/bootstrap.min.css',

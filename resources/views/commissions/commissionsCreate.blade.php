@@ -15,7 +15,7 @@
                         @error('title')
                         <br>
                         @enderror
-                        <input type="number" class="form-control" name="price" id="price" placeholder="Propina (no obligatoria)" value={{ $price ?? old('price') }}>
+                        <input type="number" class="form-control" name="tip" id="tip" placeholder="Propina (no obligatoria)" value={{ $tip ?? old('tip') }}>
                     </div>
                 </div>
 

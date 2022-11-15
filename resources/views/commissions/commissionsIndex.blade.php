@@ -5,7 +5,7 @@
         <h2 class="text-center">Mis comisiones</h2>
         <div class="mt-4 mb-3">
             <button type="button" class="btn btn-primary rounded py-3 px-4" style="background-color:#34B7A7; border-color:#34B7A7;">
-                <a href="/commission/create" class="text-decoration-none text-white">Pedir otra comisión</a>
+                <a href="/commission/create" class="text-decoration-none text-white">Pedir comisión</a>
             </button>
         </div>
 
@@ -13,19 +13,21 @@
             <table class="table table-hover  align-middle">
                 <thead class="table-dark">
                     <tr>
+                        <th scope="col"></th>
                         <th scope="col">Título</th>
                         <!-- <th scope="col">Cliente</th> -->
                         <th scope="col">Tipo</th>
                         <th scope="col">Descripción</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Uso comercial</th>
-                        <th scope="col"></th>
+                        <th scope="col" class="text-center">Propina</th>
+                        <th scope="col" class="text-center">Precio</th>
+                        <th scope="col" class="text-center">Uso comercial</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 @foreach ($commissions as $commission)
                 <tbody>
                     <tr>
+                        <td class="text-center"> <a href="/commission/{{ $commission->id }}/edit"><i class="fa-solid fa-pen"></i></a> </td>
                         <td>
                             <a href="/commission/{{ $commission->id }}"  class="text-decoration-none">
                                 {{ $commission->title }}
@@ -34,19 +36,16 @@
                         <!-- <td>{{ $commission->user->name }}</td> -->
                         <td>{{ $commission->type }}</td>
                         <td>{{ $commission->info }}</td>
-                        <td>{{ $commission->price }}</td>
-                        <td>{{ $commission->commercial }}</td>
+                        <td class="text-center">{{ $commission->tip == null ? 'NA' : $commission->tip }}</td>
+                        <td class="text-center">${{ $commission->price }}</td>
+                        <td class="text-center">{{ $commission->commercial == 1 ? 'Sí' : 'No'}}</td>
                         <td>
-                            <a href="/commission/{{ $commission->id }}/edit" class="text-decoration-none">Editar</a>
-                        </td>
-                        <td>
-                            <a href="">
-                                <form action="/commission/{{ $commission->id }}" method="post">
+                            <form action="/commission/{{ $commission->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" value="Eliminar">
-                                </form>
-                            </a>
+                                    <input type="submit" value="Eliminar" class="btn btn-primary py-1 px-3"
+                                    style="background-color:#ffeef5; border-color:#ffeef5; border-width:2px; color:#e80368; font-weight:500;">
+                            </form>
                         </td>
                     </tr>
                 </tbody>

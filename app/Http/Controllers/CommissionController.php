@@ -41,34 +41,41 @@ class CommissionController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => 'required|max:100',
-        //     'type' => 'required',
-        //     'info' => 'required|max:255',
-        //     'price' => 'required|min:1',
-        // ]);
-
         $rules = [
-            'title' => 'required|min:3|max:100',
+            'title' => 'required|min:3|max:30',
             'type' => 'required',
             'info' => 'required|min:5|max:255',
-            'price' => 'required|min:1|max:100',
+            'tip' => 'max:100',
         ];
         $customMessages = [
             'title.required' => 'El campo de nombre no se admite vacío',
             'info.required' => 'Es necesario que agregues una descripción',
-            'price.required' => 'Añade valores entre 1 y 100',
+            // 'tip.value' => '¡Te lo agradezco mucho! pero no puedes ingresar más de 100 de propina',
         ];
         $validatedData = $request->validate($rules, $customMessages);
 
+        //Validaciones para asignar los precios de cada tipo de comisión
+        if($request->type == 'perfil'){
+            $price = 10;
+        }else if($request->type == 'busto'){
+            $price = 15;
+        }else if($request->type == 'medio'){
+            $price = 20;
+        }else if($request->type == 'full'){
+            $price = 25;
+        }else if($request->type == 'escena'){
+            $price = 30;
+        }
 
+        //Si es con fines comerciales
+        if($request->commercial == 1){
+            $price += $price*0.5;
+        }
 
-        //Aunque no lo reciba por el formulario, se lo asignamos con "merge"
+        $request->merge(['price' => $price]);
+        //Aunque no reciba el id por el formulario, se lo asignamos con "merge"
         $request->merge(['user_id' => Auth::id()]);
-        // if($request->type == 'perfil'){
-        //     $price = 10;
-        // }
-        // $request->price = $price;
+
         Commission::create($request->all());
         
         return redirect('/commission');
@@ -104,30 +111,54 @@ class CommissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Commission $commission)
-    {
-        $request->validate([
-            'title' => 'required|max:100',
+    {   
+        $rules = [
+            'title' => 'required|min:3|max:30',
             'type' => 'required',
-            'info' => 'required|max:255',
-            'price' => 'required|min:1',
-        ]);
-        
+            'info' => 'required|min:5|max:255',
+            'tip' => 'max:100',
+        ];
+        $customMessages = [
+            'title.required' => 'El campo de nombre no se admite vacío',
+            'info.required' => 'Es necesario que agregues una descripción',
+            // 'tip.value' => '¡Te lo agradezco mucho! pero no puedes ingresar más de 100 de propina',
+        ];
+        $validatedData = $request->validate($rules, $customMessages);
         // $commission = new Commission();
         $commission->title = $request->title;
         $commission->type = $request->type;
         $commission->info = $request->info;
-        $commission->price = $request->price;
+        $commission->tip = $request->tip;
         if($request->commercial == null){
             $commission->commercial = 0;
         }else{
             $commission->commercial = $request->commercial;
         }
+
+        //Validaciones para asignar los precios de cada tipo de comisión
+        if($request->type == 'perfil'){
+            $price = 10;
+        }else if($request->type == 'busto'){
+            $price = 15;
+        }else if($request->type == 'medio'){
+            $price = 20;
+        }else if($request->type == 'full'){
+            $price = 25;
+        }else if($request->type == 'escena'){
+            $price = 30;
+        }
+
+        //Si es con fines comerciales
+        if($request->commercial == 1){
+            $price += $price*0.5;
+        }
+        $commission->price = $price;
+
         $commission->save();
 
         // Commission:where('id', $commission->id)->update($request->all());
 
         return redirect('/commission');
-        
     }
 
     /**

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('type');
             $table->string('info');
+            $table->float('tip')->nullable();
             $table->float('price');
             $table->boolean('commercial')->default(0);
         });

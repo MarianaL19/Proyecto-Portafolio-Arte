@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('technique');
             $table->string('format');
+            $table->string('img');
         });
     }
 
