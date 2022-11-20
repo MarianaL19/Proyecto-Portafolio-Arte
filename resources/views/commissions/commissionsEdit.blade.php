@@ -25,11 +25,11 @@
                     <div class="col-md-6 form-group">
                         <label for="type" class="my-1">Tipo de comisión</label>
                         <select name="type" id="type" class="form-control">
-                            <option value="perfil" {{ $commission->type == "perfil" ? "selected" : "" }}>Perfil</option>
-                            <option value="busto" {{ $commission->type == "busto" ? "selected" : "" }}>Busto</option>
-                            <option value="medio" {{ $commission->type == "medio" ? "selected" : "" }}>Medio Cuerpo</option>
-                            <option value="full" {{ $commission->type == "full" ? "selected" : "" }}>Cuerpo Completo</option>
-                            <option value="escena" {{ $commission->type == "escena" ? "selected" : "" }}>Escena</option>
+                            <option value="Perfil" {{ $commission->type == "Perfil" ? "selected" : "" }}>Perfil</option>
+                            <option value="Busto" {{ $commission->type == "Busto" ? "selected" : "" }}>Busto</option>
+                            <option value="Medio cuerpo" {{ $commission->type == "Medio cuerpo" ? "selected" : "" }}>Medio Cuerpo</option>
+                            <option value="Cuerpo completo" {{ $commission->type == "Cuerpo completo" ? "selected" : "" }}>Cuerpo Completo</option>
+                            <option value="Escena" {{ $commission->type == "Escena" ? "selected" : "" }}>Escena</option>
                         </select>
                     </div>
                     <div class="col-md-6 form-group">

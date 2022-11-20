@@ -156,6 +156,56 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        //* * * Mensajes de error personalizados para comisión * * *
+
+        //Comisión y Producto comparten el atributo de title (nombre)
+        'title'=> [
+            'required' => 'El :attribute es un campo obligatorio',
+            'max' => 'El :attribute es demasiado largo',
+            'min' => 'El :attribute debe tener una extensión mínima de 3 caracteres'
+        ],
+        'type'=> [
+            'required' => 'El :attribute es un campo obligatorio',
+            'max' => 'El :attribute es demasiado largo',
+        ],
+        //Comisión y Producto comparten el atributo de info (descripción)
+        'info'=> [
+            'required' => 'La :attribute es un campo obligatorio',
+            'max' => 'La :attribute es demasiado larga',
+            'min' => 'La :attribute debe tener una extensión mínima de 5 caracteres'
+        ],
+        'tip'=> [
+            'digits_between' => 'La :attribute es demasiado, verifique de nuevo',
+            'numeric' => 'La :attribute debe ser ingresada como un número'
+        ],
+        'commercial'=> [
+            'digits_between' => 'La :attribute es demasiado largo, verifique de nuevo',
+            'numeric' => 'La :attribute debe ser ingresada como un número'
+        ],
+
+        //* * * Mensajes de error personalizados para Producto * * *
+        'price'=> [
+            'required' => 'El :attribute es un campo obligatorio',
+            'digits_between' => 'El :attribute es demasiado, verifique de nuevo',
+            'numeric' => 'El :attribute debe ser ingresada como un número'
+        ],
+        'author'=> [
+            'required' => 'El :attribute es un campo obligatorio',
+            'max' => 'El nombre del :attribute es demasiado largo',
+            'min' => 'El nombre del :attribute debe tener una extensión mínima de 3 caracteres'
+        ],
+        'technique'=> [
+            'required' => 'La :attribute es un campo obligatorio',
+            'max' => 'El nombre de la :attribute es demasiado largo',
+        ],
+        'format'=> [
+            'required' => 'La :attribute es un campo obligatorio',
+            'max' => 'El :attribute es demasiado largo',
+        ],
+        'img' => [
+            'max' => 'La extensión de la :attribute es demasiado larga',
+        ],
+
     ],
 
     /*
@@ -169,6 +219,21 @@ return [
     |
     */
 
-    'attributes' => [],
+    //Nombre personalizado de los atributos
+    'attributes' => [
+        //Comisión
+        'title' => 'nombre',
+        'type' => 'tipo',
+        'info' => 'descripción',
+        'tip' => 'propina',
+        'price' => 'precio',
+        'commercial' => 'comercial',
+
+        //Producto
+        'author' => 'autor',
+        'technique' => 'técnica',
+        'format' => 'formato',
+        'img' => 'imagen',
+    ],
 
 ];

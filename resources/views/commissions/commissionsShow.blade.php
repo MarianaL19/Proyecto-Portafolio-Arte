@@ -1,5 +1,5 @@
 
-<x-plantilla>
+<x-plantilla titulo="Ver comisión">
 <body style="
 background-image: url(../img/bg-white.jpg);
  background-size: 100% auto;

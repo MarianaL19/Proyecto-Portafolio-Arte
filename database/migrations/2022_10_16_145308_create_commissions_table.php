@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('info');
             $table->float('tip')->nullable();
-            $table->float('price');
+            $table->float('price')->default(0);
             $table->boolean('commercial')->default(0);
         });
     }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+
+        return view('products.productsIndex', compact('products'));
     }
 
     /**
@@ -24,7 +28,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+
+        return view('products.productsCreate', compact('users'));
     }
 
     /**
@@ -35,7 +41,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3|max:30',
+            'price' => 'required|digits_between:5,100|numeric',
+            'info' => 'required|min:5|max:255',
+            'author' => 'required|min:3|max:30',
+            'technique' => 'required|min:3|max:30',
+            'format' => 'required|min:3|max:30',
+            'img' => 'max:255',
+        ]);
+
+        // $request->merge(['user_id' => Auth::id()]);
+
+        Product::create($request->all());
+
+        return redirect('/product');
     }
 
     /**
@@ -80,6 +100,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->destroy($product->id);
+        return redirect('/product');
+    }
+
+    public function favorite(Request $request, Product $product)
+    {
+        $user_id = Auth::id();
+        $producto = Product::find($request->id_product);
+        // dd($producto);
+        $producto->users()->attach($user_id);
+        return redirect('/product');
     }
 }

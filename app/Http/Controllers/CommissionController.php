@@ -18,8 +18,9 @@ class CommissionController extends Controller
         // $commissions = Commission::all();
         
         //Solo mostrar las comisiones propias del usuario Logeado
-        // $commissions = Commission::where('user_id', Auth::id())->get();
+        // $commissions = Commission::where('user_id', Auth::id())->get());
         $commissions = Auth::user()->commissions;
+        
         return view('commissions.commissionsIndex', compact('commissions'));
     }
 
@@ -41,29 +42,25 @@ class CommissionController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+        $request->validate([
             'title' => 'required|min:3|max:30',
             'type' => 'required',
             'info' => 'required|min:5|max:255',
-            'tip' => 'max:100',
-        ];
-        $customMessages = [
-            'title.required' => 'El campo de nombre no se admite vacío',
-            'info.required' => 'Es necesario que agregues una descripción',
-            // 'tip.value' => '¡Te lo agradezco mucho! pero no puedes ingresar más de 100 de propina',
-        ];
-        $validatedData = $request->validate($rules, $customMessages);
+            // 'tip' => 'digits_between:0,100|numeric',
+            'price' => 'numeric',
+            'commercial' => 'digits_between:0,1|numeric',
+        ]);
 
         //Validaciones para asignar los precios de cada tipo de comisión
-        if($request->type == 'perfil'){
+        if($request->type == 'Perfil'){
             $price = 10;
-        }else if($request->type == 'busto'){
+        }else if($request->type == 'Busto'){
             $price = 15;
-        }else if($request->type == 'medio'){
+        }else if($request->type == 'Medio cuerpo'){
             $price = 20;
-        }else if($request->type == 'full'){
+        }else if($request->type == 'Cuerpo completo'){
             $price = 25;
-        }else if($request->type == 'escena'){
+        }else if($request->type == 'Escena'){
             $price = 30;
         }
 
@@ -136,15 +133,15 @@ class CommissionController extends Controller
         }
 
         //Validaciones para asignar los precios de cada tipo de comisión
-        if($request->type == 'perfil'){
+        if($request->type == 'Perfil'){
             $price = 10;
-        }else if($request->type == 'busto'){
+        }else if($request->type == 'Busto'){
             $price = 15;
-        }else if($request->type == 'medio'){
+        }else if($request->type == 'Medio cuerpo'){
             $price = 20;
-        }else if($request->type == 'full'){
+        }else if($request->type == 'Cuerpo completo'){
             $price = 25;
-        }else if($request->type == 'escena'){
+        }else if($request->type == 'Escena'){
             $price = 30;
         }
 

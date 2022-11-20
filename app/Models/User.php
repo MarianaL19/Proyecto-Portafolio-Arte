@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Commission::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

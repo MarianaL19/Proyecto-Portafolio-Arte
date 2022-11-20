@@ -23,11 +23,11 @@
                     <div class="col-md-6 form-group">
                         <label for="type" class="my-1">Tipo de comisión</label>
                         <select name="type" id="type" class="form-control">
-                            <option value="perfil" selected>Perfil</option>
-                            <option value="busto">Busto</option>
-                            <option value="medio">Medio Cuerpo</option>
-                            <option value="full">Cuerpo Completo</option>
-                            <option value="escena">Escena</option>
+                            <option value="Perfil" selected>Perfil</option>
+                            <option value="Busto">Busto</option>
+                            <option value="Medio cuerpo">Medio Cuerpo</option>
+                            <option value="Cuerpo completo">Cuerpo Completo</option>
+                            <option value="Escena">Escena</option>
                         </select>
                     </div>
                     <div class="col-md-6 form-group">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,11 @@ Route::get('/', function () {
 });
 
 Route::resource('commission', CommissionController::class);
-
+Route::resource('product', ProductController::class);
+Route::get('/index', function () {
+    return view('index');
+});
+Route::post('/favorito/{product_id}', [ProductController::class, 'favorite']);
 
 Route::middleware([
     'auth:sanctum',
