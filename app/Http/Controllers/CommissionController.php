@@ -109,18 +109,15 @@ class CommissionController extends Controller
      */
     public function update(Request $request, Commission $commission)
     {   
-        $rules = [
+        $request->validate([
             'title' => 'required|min:3|max:30',
             'type' => 'required',
             'info' => 'required|min:5|max:255',
-            'tip' => 'max:100',
-        ];
-        $customMessages = [
-            'title.required' => 'El campo de nombre no se admite vacío',
-            'info.required' => 'Es necesario que agregues una descripción',
-            // 'tip.value' => '¡Te lo agradezco mucho! pero no puedes ingresar más de 100 de propina',
-        ];
-        $validatedData = $request->validate($rules, $customMessages);
+            // 'tip' => 'digits_between:0,100|numeric',
+            'price' => 'numeric',
+            'commercial' => 'digits_between:0,1|numeric',
+        ]);
+        
         // $commission = new Commission();
         $commission->title = $request->title;
         $commission->type = $request->type;

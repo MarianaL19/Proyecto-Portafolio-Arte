@@ -11,6 +11,7 @@
           <li><a href="/index" class="active text-decoration-none">Inicio</a></li>
           <li><a href="/commission" class="active text-decoration-none">Comisiones</a></li>
           <li><a href="/product" class="active text-decoration-none">Productos</a></li>
+          <li><a href="/favorite" class="active text-decoration-none">Favoritos</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

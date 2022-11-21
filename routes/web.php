@@ -19,12 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('commission', CommissionController::class);
+//Rutas de los modelos
+Route::resource('commission', CommissionController::class)->middleware('auth');
 Route::resource('product', ProductController::class);
+
+//Ruta del Index
 Route::get('/index', function () {
     return view('index');
 });
-Route::post('/favorito/{product_id}', [ProductController::class, 'favorite']);
+
+//Rutas utilizadas para los favoritos (relación n:m)
+Route::post('/favorite/{product_id}', [ProductController::class, 'favorite']);
+Route::post('/favorite/delete/{product_id}', [ProductController::class, 'deleteFavorite']);
+Route::get('/favorite', [ProductController::class, 'showFavorites']);
+// Route::get('/favorite', function () {
+//     return view('favorites.favorites');
+// });
 
 Route::middleware([
     'auth:sanctum',

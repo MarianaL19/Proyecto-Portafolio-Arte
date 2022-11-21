@@ -14,6 +14,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index()
     {
         $products = Product::all();
@@ -43,7 +49,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'title' => 'required|min:3|max:30',
-            'price' => 'required|digits_between:5,100|numeric',
+            'price' => 'required|numeric',
             'info' => 'required|min:5|max:255',
             'author' => 'required|min:3|max:30',
             'technique' => 'required|min:3|max:30',
@@ -66,7 +72,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('products.productsShow', compact('product'));
+
     }
 
     /**
@@ -77,7 +84,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.productsEdit', compact('product'));
     }
 
     /**
@@ -89,7 +96,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3|max:30',
+            'price' => 'required|numeric',
+            'info' => 'required|min:5|max:255',
+            'author' => 'required|min:3|max:30',
+            'technique' => 'required|min:3|max:30',
+            'format' => 'required|min:3|max:30',
+            'img' => 'max:255',
+        ]);
+
+        $product->title = $request->title;
+        $product->price = $request->price;
+        $product->info = $request->info;
+        $product->author = $request->author;
+        $product->technique = $request->technique;
+        $product->format = $request->format;
+        $product->img = $request->img;
+
+        $product->save();
+        return redirect('/product');
     }
 
     /**
@@ -111,5 +137,22 @@ class ProductController extends Controller
         // dd($producto);
         $producto->users()->attach($user_id);
         return redirect('/product');
+    }
+
+    public function deleteFavorite(Request $request)
+    {
+        $user_id = Auth::id();
+        $producto = Product::find($request->id_product);
+        $producto->users()->detach($user_id);
+        return redirect('/favorite');
+    }
+
+    public function showFavorites()
+    {
+        $products = Auth::user()->products;
+        $products = $products->unique('title');
+        // dd($products);
+
+        return view('favorites.favorites', compact('products'));
     }
 }
