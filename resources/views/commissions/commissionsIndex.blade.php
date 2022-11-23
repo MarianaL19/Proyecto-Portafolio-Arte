@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 @foreach ($commissions as $commission)
-                <tbody>
+                <tbody style="border-style:none">
                     <tr>
                         <td class="text-center"> <a href="/commission/{{ $commission->id }}/edit"><i class="fa-solid fa-pen"></i></a> </td>
                         <td>

@@ -1313,9 +1313,11 @@ section {
   max-height:300px;
 }
 
-
-/* Barra de navegación */
+/*--------------------------------------------------------------
+# Navbar
+--------------------------------------------------------------*/
 /* Add a black background color to the top navigation */
+
 .topnav {
   background-color: #e9e8e6;
   overflow: hidden;
@@ -1323,19 +1325,20 @@ section {
 
 /* Style the links inside the navigation bar */
 .topnav a {
+  font-family: "Open Sans", sans-serif;
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: #575757;
   text-align: center;
-  padding: 14px 16px;
+  padding: 18px 26px 25px 18px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  /* background-color: #ddd; */
+  color: #34b7a7;
 }
 
 /* Add an active class to highlight the current page */

@@ -1,20 +1,17 @@
-<header id="header" class="fixed-top">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
+<header class="fixed-top">
+    {{-- <div class="container-fluid d-flex justify-content-between align-items-center">
 
       <h1 class="logo me-auto me-lg-0"><a href="/index" class="text-decoration-none">U-Art</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <!-- <li><a class="active" href=#>Home</a></li> -->
           <li><a href="/index" class="active text-decoration-none">Inicio</a></li>
           <li><a href="/commission" class="active text-decoration-none">Comisiones</a></li>
           <li><a href="/product" class="active text-decoration-none">Productos</a></li>
           <li><a href="/favorite" class="active text-decoration-none">Favoritos</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
 
       <div class="header-social-links">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -22,5 +19,14 @@
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
       </div>
+    </div> --}}
+    <div class="topnav" id="myTopnav">
+        <a href="/index" style="font-size: 35px; color:black; padding: 10px 0px 4px 20px;">U-Art</a>
+        <a href="/favorite" style="float: right;"><b>Favoritos</b></a>
+        <a href="/product" style="float: right;"><b>Productos</b></a>
+        <a href="/commission" style="float: right;"><b>Comisiones</b></a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()" style="font-size:20px;">
+          <i class="fa fa-bars"></i>
+        </a>
     </div>
 </header>

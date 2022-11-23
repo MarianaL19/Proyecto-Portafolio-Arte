@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 @foreach ($products as $product)
-                <tbody>
+                <tbody style="border-style:none">
                     <tr>
                         <td class="text-center"> <a href="/product/{{ $product->id }}/edit"><i class="fa-solid fa-pen"></i></a> </td>
                         <td>
@@ -62,7 +62,7 @@
                 
                 @foreach ($products as $product)
                 <div class="col-lg-4 col-md-6 assetsportfolio-item filter-app">
-                    <div class="portfolio-wrap mt-3">
+                    <div class="portfolio-wrap  mb-5">
                         <img src="/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
                         <div class="portfolio-info">
                         <a href="/product/{{ $product->id }}" class="portfolio-details-lightbox text-decoration-none" ><h4>{{ $product->title }}</h4></a>

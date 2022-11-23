@@ -35,4 +35,6 @@
 </body>
 
 </html>
+<x-footer/>
+
 </x-plantilla>

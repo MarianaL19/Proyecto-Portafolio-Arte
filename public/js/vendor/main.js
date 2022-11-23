@@ -241,10 +241,6 @@
   /**
    * Initiate Pure Counter 
    */
-  new PureCounter();
+  // new PureCounter();
 
-})()
-
-.table-responsive {
-  max-height:300px;
-}
+})();
