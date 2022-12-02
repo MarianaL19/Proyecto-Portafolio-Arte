@@ -21,12 +21,36 @@
       </div>
     </div> --}}
     <div class="topnav" id="myTopnav">
-        <a href="/index" style="font-size: 35px; color:black; padding: 10px 0px 4px 20px;">U-Art</a>
-        <a href="/favorite" style="float: right;"><b>Favoritos</b></a>
-        <a href="/product" style="float: right;"><b>Productos</b></a>
-        <a href="/commission" style="float: right;"><b>Comisiones</b></a>
+      <a href="/index" style="font-size: 35px; color:black; padding: 10px 0px 4px 20px;">U-Art</a> 
+        @if (Route::has('login'))
+          @auth
+            <div style="float: right; padding-top:9px;">
+              <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <x-jet-dropdown-link href="{{ route('logout') }}"
+                onclick="event.preventDefault(); this.closest('form').submit();">
+                <i class="fa-solid fa-right-to-bracket" style="font-size:20px"></i><b>{{ __('  Salir') }}</b>
+                </x-jet-dropdown-link>
+              </form>     
+            </div>
+            @if (\Auth::user()->rol != "admin")
+              <a href="/favorite" style="float: right;"><b>Favoritos</b></a>
+            @endif
+            <a href="/commission" style="float: right;"><b>Comisiones</b></a>
+          @else
+            <div style="float: right;">
+              <a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket" style="font-size:16px"></i><b>  Iniciar sesión</b></a>
+              @if (Route::has('register'))
+                <a href="{{ route('register') }}" ><i class="fas fa-user-plus" style="font-size:16px"></i><b>  Registrarse</b></a>
+              @endif
+            </div>
+          @endauth   
+             
+        @endif
         <a href="javascript:void(0);" class="icon" onclick="myFunction()" style="font-size:20px;">
           <i class="fa fa-bars"></i>
-        </a>
+        </a>    
+        <a href="/product" style="float: right;"><b>Productos</b></a>
+
     </div>
 </header>

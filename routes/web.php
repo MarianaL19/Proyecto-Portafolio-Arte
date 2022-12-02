@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 //Rutas de los modelos
@@ -42,6 +42,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('index');
     })->name('dashboard');
 });

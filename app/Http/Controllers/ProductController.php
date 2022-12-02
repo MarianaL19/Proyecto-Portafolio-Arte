@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,7 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index','show');
     }
 
     public function index()
@@ -84,6 +85,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        //Validamos si es el administrador el que quiere editar un producto
+        if (! Gate::allows('edita-producto')){
+            abort(403);
+        }
         return view('products.productsEdit', compact('product'));
     }
 
@@ -126,6 +131,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        //Validamos si es el administrador el que quiere eliminar un producto
+        if (! Gate::allows('edita-producto')){
+            abort(403);
+        }
+
         $product->destroy($product->id);
         return redirect('/product');
     }
@@ -149,6 +159,10 @@ class ProductController extends Controller
 
     public function showFavorites()
     {
+        if (! Gate::allows('ver-favoritos')){
+            abort(403);
+        }
+
         $products = Auth::user()->products;
         $products = $products->unique('title');
         // dd($products);

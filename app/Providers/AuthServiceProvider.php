@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+// use Illuminate\Auth\Access\Gate;
+use App\Models\User;
+use App\Models\Commission;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //Gate para que solo el admin pueda editar un producto
+        Gate::define('edita-producto', function(User $user){
+            return $user->rol == "admin";
+        });
+
+        //Gate para que solo el admin y el dueño puedan VER/EDITAR la comisión
+        Gate::define('ver-edita-comision', function(User $user, Commission $commission){
+            return ($user->id == $commission->user_id) || $user->rol == "admin";
+        });
+
+        Gate::define('ver-favoritos', function(User $user){
+            return $user->rol != "admin";
+        });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Commission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CommissionController extends Controller
 {
@@ -19,7 +20,12 @@ class CommissionController extends Controller
         
         //Solo mostrar las comisiones propias del usuario Logeado
         // $commissions = Commission::where('user_id', Auth::id())->get());
-        $commissions = Auth::user()->commissions;
+
+        if(Auth::user()->rol == "admin"){
+            $commissions = Commission::all();
+        }else{
+            $commissions = Auth::user()->commissions;
+        }
         
         return view('commissions.commissionsIndex', compact('commissions'));
     }
@@ -86,6 +92,10 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
+        //Validamos si es el mismo usuario el que quiere editar su comisión
+        if (! Gate::allows('ver-edita-comision', $commission)){
+            abort(403);
+        }
         return view('commissions.commissionsShow', compact('commission'));
     }
 
@@ -97,6 +107,10 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
+        //Validamos si es el mismo usuario el que quiere editar su comisión
+        if (! Gate::allows('ver-edita-comision', $commission)){
+            abort(403);
+        }
         return view('commissions.commissionsEdit', compact('commission'));
     }
 
@@ -163,6 +177,10 @@ class CommissionController extends Controller
      */
     public function destroy(Commission $commission)
     {
+        //Validamos si es el mismo usuario el que quiere ELIMINAR su comisión
+        if (! Gate::allows('ver-edita-comision', $commission)){
+            abort(403);
+        }
         $commission->destroy($commission->id);
         return redirect('/commission');
     }

@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         \App\Models\User::factory(10)->create();
 
         \App\Models\Commission::factory(5)->create();
-        \App\Models\Product::factory(5)->create();
+        \App\Models\Product::factory(15)->create();
 
         //Poblar la tabla product_user
         foreach (range(1,10) as $index) {
