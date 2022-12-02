@@ -28,13 +28,16 @@ Route::get('/index', function () {
     return view('index');
 });
 
-//Rutas utilizadas para los favoritos (relación n:m)
+//Rutas utilizadas para la sección de favoritos (relación n:m)
+Route::get('/favorite', [ProductController::class, 'showFavorites']);
 Route::post('/favorite/{product_id}', [ProductController::class, 'favorite']);
 Route::post('/favorite/delete/{product_id}', [ProductController::class, 'deleteFavorite']);
-Route::get('/favorite', [ProductController::class, 'showFavorites']);
-// Route::get('/favorite', function () {
-//     return view('favorites.favorites');
-// });
+
+//Ruta para la sección de papelera (productos)
+Route::get('/products/trash', [ProductController::class, 'trash']);
+Route::post('/products/trash/{product_id}', [ProductController::class, 'forcedelete']);
+Route::post('/products/{product_id}/restore', [ProductController::class, 'restore']);
+
 
 Route::middleware([
     'auth:sanctum',

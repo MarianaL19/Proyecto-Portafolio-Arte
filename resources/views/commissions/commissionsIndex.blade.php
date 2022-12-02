@@ -1,7 +1,6 @@
 
 <x-plantilla titulo="Listado de Comisiones">
     <div class="my-5 py-2 mx-5" >
-        <!-- <h2>Usuario: {{ \Auth::user()->name }} - {{ auth()->user()->email }}</h2> -->
         <h2 class="text-center">{{ \Auth::user()->rol == "admin" ? 'Listado de comisiones' : 'Mis comisiones' }}</h2>
         
         {{-- Botón para pedir comisión, se le oculta al admin --}}
@@ -15,13 +14,26 @@
             <br><br>
         @endif
 
+        @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if (session('delete'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('delete') }}
+        </div>
+        @endif
+
         <div class="table-responsive">
             <table class="table table-hover  align-middle">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col"></th>
                         <th scope="col">Título</th>
-                        <!-- <th scope="col">Cliente</th> -->
+                        @if (\Auth::user()->rol == "admin")
+                            <th scope="col">Cliente</th>
+                        @endif
                         <th scope="col">Tipo</th>
                         <th scope="col">Descripción</th>
                         <th scope="col" class="text-center">Propina</th>
@@ -39,7 +51,9 @@
                                 {{ $commission->title }}
                             </a>
                         </td>
-                        <!-- <td>{{ $commission->user->name }}</td> -->
+                        @if (\Auth::user()->rol == "admin")
+                        <td>{{ $commission->user->name }}</td>
+                        @endif
                         <td>{{ $commission->type }}</td>
                         <td>{{ $commission->info }}</td>
                         <td class="text-center">{{ $commission->tip == null ? 'NA' : $commission->tip }}</td>

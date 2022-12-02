@@ -1,5 +1,6 @@
 <x-plantilla titulo="Crear producto">
     <div class="my-5 py-2 mx-5 pt-5" >
+        <h3 class="text-center mb-4" style="color:rgb(96, 96, 96)">Crear producto</h3>
         <div style="display: flex; align-items: center; justify-content: center;">
         <div class="col-lg-8 mt-5 mt-lg-0">
             <form action="/product" method="post">
@@ -62,12 +63,6 @@
                     @enderror
                     <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción del producto" >{{ $info ?? old('info') }}</textarea>
                 </div>
-
-                {{-- <select name="id_user" id="id_user">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->id }}</option>
-                    @endforeach
-                </select> --}}
                 
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary rounded-pill py-3 px-4" style="background-color:#34B7A7; border-color:#34B7A7;">

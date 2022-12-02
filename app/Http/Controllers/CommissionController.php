@@ -22,9 +22,11 @@ class CommissionController extends Controller
         // $commissions = Commission::where('user_id', Auth::id())->get());
 
         if(Auth::user()->rol == "admin"){
-            $commissions = Commission::all();
+            //Se realiza la consulta con with para minimizar el problema de N+1 consultas
+            $commissions = Commission::with('user')->get();
         }else{
             $commissions = Auth::user()->commissions;
+            // $commissions = Auth::user()::with('commissions')->get();
         }
         
         return view('commissions.commissionsIndex', compact('commissions'));
@@ -81,7 +83,7 @@ class CommissionController extends Controller
 
         Commission::create($request->all());
         
-        return redirect('/commission');
+        return redirect('/commission')->with('success','¡Comisión creada exitosamente! :)');
     }
 
     /**
@@ -166,7 +168,7 @@ class CommissionController extends Controller
 
         // Commission:where('id', $commission->id)->update($request->all());
 
-        return redirect('/commission');
+        return redirect('/commission')->with('success','La comisión se ha editado con éxito.');
     }
 
     /**
@@ -182,6 +184,6 @@ class CommissionController extends Controller
             abort(403);
         }
         $commission->destroy($commission->id);
-        return redirect('/commission');
+        return redirect('/commission')->with('delete','Se ha eliminado la comisión.');
     }
 }

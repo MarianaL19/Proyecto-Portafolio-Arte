@@ -18,11 +18,13 @@ class ProductController extends Controller
 
     public function __construct()
     {
+        //Middelware para que se permita mostrar el index y la vista individual de los productos
         $this->middleware('auth')->except('index','show');
     }
 
     public function index()
     {
+        // $products = Product::with('users')->get();
         $products = Product::all();
 
         return view('products.productsIndex', compact('products'));
@@ -35,9 +37,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-
-        return view('products.productsCreate', compact('users'));
+        return view('products.productsCreate');
     }
 
     /**
@@ -62,7 +62,7 @@ class ProductController extends Controller
 
         Product::create($request->all());
 
-        return redirect('/product');
+        return redirect('/product')->with('success','¡Producto creado exitosamente! :)');
     }
 
     /**
@@ -120,7 +120,7 @@ class ProductController extends Controller
         $product->img = $request->img;
 
         $product->save();
-        return redirect('/product');
+        return redirect('/product')->with('success','El producto se ha editado con éxito.');
     }
 
     /**
@@ -129,6 +129,8 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
+
+    // Método para eliminar un producto
     public function destroy(Product $product)
     {
         //Validamos si es el administrador el que quiere eliminar un producto
@@ -137,9 +139,42 @@ class ProductController extends Controller
         }
 
         $product->destroy($product->id);
-        return redirect('/product');
+        return redirect('/product')->with('delete','Se ha eliminado el producto.');
     }
 
+
+    // * * * * Funciones para la PAPELERA * * * *
+
+    //Métdoo para MOSTRAR la papelera de productos
+    public function trash()
+    {
+        $products = Product::onlyTrashed()->get();
+
+        return view('products.productsTrash', compact('products'));
+    }  
+
+    //Función para VACIAR la papelera de productos
+    public function forcedelete($id)
+    {
+        $products = Product::withTrashed()->find($id);
+        $products->forceDelete();
+
+        return redirect('/products/trash')->with('delete','Se ha eliminado DEFINITIVAMENTE el producto.');
+    }
+
+    //Función para RECUPERAR los elementos en la papelera
+    public function restore($id)
+    {
+        $products = Product::withTrashed()->find($id);
+        $products->restore();
+
+        return redirect('/products/trash')->with('success','El producto se ha restaurado con éxito. ;)');
+    }
+
+
+    // * * * * Funciones de la tabla user_product | FAVORITOS * * * *
+
+    // Función para RELACIONAR un producto a los favoritos de un usuario
     public function favorite(Request $request, Product $product)
     {
         $user_id = Auth::id();
@@ -149,6 +184,7 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
+    // Función para ELIMINAR un producto de los favoritos
     public function deleteFavorite(Request $request)
     {
         $user_id = Auth::id();
@@ -157,6 +193,7 @@ class ProductController extends Controller
         return redirect('/favorite');
     }
 
+    // Función para MOSTRAR los productos favoritos de un usuario
     public function showFavorites()
     {
         if (! Gate::allows('ver-favoritos')){

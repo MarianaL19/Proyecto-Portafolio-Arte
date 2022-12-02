@@ -9,11 +9,31 @@
             {{-- Si hay un usuario logueado, evaluamos si es el admin para mostrar la tabla de productos --}}
             @if (\Auth::user()->rol == "admin")
             {{-- Botón para añadir productos --}}
-            <div class="mt-4 mb-3">
-                <button type="button" class="btn btn-primary rounded py-3 px-4" style="background-color:#34B7A7; border-color:#34B7A7;">
-                    <a href="/product/create" class="text-decoration-none text-white">Añadir producto</a>
-                </button>
+            <div class="">
+                <div class="row align-items-start">
+                    <div class="col mt-4 mb-3">
+                        <button type="button" class="btn btn-primary rounded py-3 px-4" style="background-color:#34B7A7; border-color:#34B7A7;">
+                            <a href="/product/create" class="text-decoration-none text-white">Añadir producto</a>
+                        </button>
+                    </div>
+                    <div class="col mt-4 mb-3">
+                        <button type="button" class="btn btn-primary rounded py-3 px-4" style="background-color:#b0afaf; border-color:#b0afaf;float:right;">
+                            <a href="/products/trash" class="text-decoration-none text-white">Ir a la Papelera</a>
+                        </button>
+                    </div>
+                </div>
             </div>
+
+            @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+            @endif
+            @if (session('delete'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('delete') }}
+            </div>
+            @endif
 
             {{-- Tabla de Productos --}}
             <div class="table-responsive">

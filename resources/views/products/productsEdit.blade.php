@@ -1,5 +1,6 @@
 <x-plantilla titulo="Editar producto">
-    <div class="my-5 py-2 mx-5 pt-5" >
+    <div class="my-5 py-2 mx-5 pt-5">
+        <h3 class="text-center mb-4" style="color:rgb(96, 96, 96)">Editar producto</h3>
         <div style="display: flex; align-items: center; justify-content: center;">
         <div class="col-lg-8 mt-5 mt-lg-0">
             <form action="/product/{{ $product->id }}" method="post">

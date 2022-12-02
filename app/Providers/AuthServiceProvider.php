@@ -38,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->id == $commission->user_id) || $user->rol == "admin";
         });
 
+        //Gate para que el admin NO pueda ver los favoritos.
         Gate::define('ver-favoritos', function(User $user){
             return $user->rol != "admin";
         });
