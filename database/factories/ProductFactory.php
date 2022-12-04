@@ -24,11 +24,11 @@ class ProductFactory extends Factory
             // 'user_id' => User::inRandomOrder()->first()->id,
             'title' => $this->faker->words(3, true),
             'price' => $this->faker->numberBetween(10, 100),
-            'info' => $this->faker->sentence(5),
+            'info' => $this->faker->sentence(10),
             'author' => $this->faker->name(),
             'technique' => $this->faker->word(),
             'format' => $this->faker->word(),
-            'img' => $this->faker->word(),
+            'img' => null,
         ];
     }
 }

@@ -32,7 +32,6 @@
                         <th scope="col">Autor</th>
                         <th scope="col">Técnica</th>
                         <th scope="col">Formato</th>
-                        <th scope="col">Link Imagen</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -48,7 +47,6 @@
                         <td>{{ $product->author }}</td>
                         <td>{{ $product->technique }}</td>
                         <td>{{ $product->format }}</td>
-                        <td>{{ $product->img }}</td>
                         <td>
                             <form action="/products/{{ $product->id }}/restore" method="POST">
                                 @csrf                                

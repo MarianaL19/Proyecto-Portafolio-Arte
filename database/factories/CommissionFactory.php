@@ -25,7 +25,7 @@ class CommissionFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'title' => $this->faker->words(3, true),
             'type' => $this->faker->words(2, true),
-            'info' => $this->faker->sentence(5),
+            'info' => $this->faker->sentence(7),
             'tip' => $this->faker->numberBetween(0, 50),
             'price' => $this->faker->numberBetween(10, 100),
             'commercial' => $this->faker->numberBetween(0, 1),

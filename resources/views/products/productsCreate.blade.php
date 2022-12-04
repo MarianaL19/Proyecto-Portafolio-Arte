@@ -3,7 +3,7 @@
         <h3 class="text-center mb-4" style="color:rgb(96, 96, 96)">Crear producto</h3>
         <div style="display: flex; align-items: center; justify-content: center;">
         <div class="col-lg-8 mt-5 mt-lg-0">
-            <form action="/product" method="post">
+            <form action="/product" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-2">
                     <div class="col-md-6 form-group">
@@ -49,12 +49,12 @@
                         @enderror
                         <input type="text" name="author" class="form-control" id="author" placeholder="Nombre del autor" value={{ $author ?? old('author') }}>
                     </div>
-                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                    {{-- <div class="col-md-6 form-group mt-3 mt-md-0">
                         @error('author')
                         <br>
                         @enderror
                         <input type="text" name="img" class="form-control" id="img" placeholder="Dirección de la imagen" value={{ $img ?? old('img') }}>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="form-group mt-3">
@@ -64,6 +64,18 @@
                     <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción del producto" >{{ $info ?? old('info') }}</textarea>
                 </div>
                 
+                
+                <div class="form-group mt-3">
+                    @error('img')
+                    <i class="text-danger">{{ $message }}</i><br>
+                    @enderror
+                    <fieldset>
+                        <label for="img" class="form-label" style="color:rgb(142, 142, 142)">Selecciona una imagen para el producto</label><br>
+                            <input type="file" name="img" id="img">
+                        <br>
+                    </fieldset>
+                </div>
+
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary rounded-pill py-3 px-4" style="background-color:#34B7A7; border-color:#34B7A7;">
                         Agregar

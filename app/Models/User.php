@@ -59,11 +59,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    //Relación 1:N -> Un usuario tiene muchas comisiones
     public function commissions()
     {
         return $this->hasMany(Commission::class);
     }
 
+    //Relación N:M -> un usuario puede tener muchos productos (En favoritos)
     public function products()
     {
         return $this->belongsToMany(Product::class);

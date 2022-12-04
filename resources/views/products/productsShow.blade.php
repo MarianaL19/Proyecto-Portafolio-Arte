@@ -16,7 +16,11 @@
                     <div class="swiper-wrapper align-items-center">
       
                       <div class="swiper-slide">
-                        <img src="/img/portfolio/portfolio-8.jpg" alt="Imagen demostrativa del producto: {{ $product->title }}">
+                        @if($product->img == null)
+                            <img src="/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+                        @else
+                            <img src="{{ \Storage::url($product->img) }}" class="img-fluid"  alt="">
+                        @endif
                       </div>
     
                     </div>

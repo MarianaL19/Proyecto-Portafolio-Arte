@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProductController extends Controller
 {
@@ -55,12 +58,34 @@ class ProductController extends Controller
             'author' => 'required|min:3|max:30',
             'technique' => 'required|min:3|max:30',
             'format' => 'required|min:3|max:30',
-            'img' => 'max:255',
+            'img' => 'required|image|mimes:jpeg,png|max:3000'
         ]);
 
         // $request->merge(['user_id' => Auth::id()]);
 
-        Product::create($request->all());
+        $product = Product::create($request->all());
+
+
+        // Validación para añadir el archivo
+        if ($request->file('img')->isValid()) {
+            //Directorio donde se guardará el archivo
+            $location = $request->img->store('public/productFiles');
+
+            $file = new File();
+            $file->location = $location
+            ;
+            // Le asignamos al atributo 'originalName' del modelo 'file' una función que ayuda a obtener el nombre original del cliente //
+            $file->originalName = $request->img->getClientOriginalName();
+            // Le asignamos al atributo 'mime' del modelo 'archivo' un valor por default //
+            $file->mime = $request->img->getClientMimeType();
+
+            // Guardamos el objeto 'file' con la relación a nivel modelo //
+            $product->files()->save($file);
+
+            //Actualizamos el campo "img" de nuestro producto con la ubicación del archivo
+            $product->img = $location;
+            $product->save();
+        }
 
         return redirect('/product')->with('success','¡Producto creado exitosamente! :)');
     }
@@ -108,7 +133,7 @@ class ProductController extends Controller
             'author' => 'required|min:3|max:30',
             'technique' => 'required|min:3|max:30',
             'format' => 'required|min:3|max:30',
-            'img' => 'max:255',
+            'img' => 'image|mimes:jpeg,png|max:3000'
         ]);
 
         $product->title = $request->title;
@@ -120,6 +145,32 @@ class ProductController extends Controller
         $product->img = $request->img;
 
         $product->save();
+
+        //Si recibimos un archivo, lo reemplazamos
+        if($request->img != null){
+            if($request->file('img')->isValid()){
+                
+                //Eliminamos el archivo anterior
+                Storage::delete($product->files);
+                File::where('product_id', $product->id)->delete();
+                
+                //Creamos el nuevo archivo
+                $location = $request->img->store('public/productFiles');
+
+                $file = new File();
+                $file->location = $location;
+                $file->originalName = $request->img->getClientOriginalName();
+                $file->mime = $request->img->getClientMimeType();
+
+                // Guardamos el objeto 'file' con la relación a nivel modelo //
+                $product->files()->save($file);
+
+                //Actualizamos el campo "img" de nuestro producto con la ubicación del archivo
+                $product->img = $location;
+                $product->save();
+            }
+        }
+
         return redirect('/product')->with('success','El producto se ha editado con éxito.');
     }
 
@@ -138,7 +189,13 @@ class ProductController extends Controller
             abort(403);
         }
 
+        //Eliminamos los archivos relacionados con el producto
+        Storage::delete($product->files);
+        File::where('product_id', $product->id)->delete();
+
+        //Eliminamos el producto
         $product->destroy($product->id);
+        
         return redirect('/product')->with('delete','Se ha eliminado el producto.');
     }
 

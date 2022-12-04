@@ -20,16 +20,26 @@ class UserSeeder extends Seeder
     {
         //Creo el usuario administrador
         User::create([
-            'name' => 'Mariana',
+            'name' => 'Admin',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'email' => 'mariana@test.com',
+            'email' => 'admin@test.com',
             'rol' => 'admin',
         ]);
 
+        //Creo un usuario común
+        User::create([
+            'name' => 'User',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'email' => 'user@test.com',
+            'rol' => 'user',
+        ]);
+
+        //Factory para poblar la tabla de usuarios
         \App\Models\User::factory(10)->create();
 
+        //Factories para poblar las tablas de comisiones y productos
         \App\Models\Commission::factory(5)->create();
-        \App\Models\Product::factory(15)->create();
+        \App\Models\Product::factory(6)->create();
 
         //Poblar la tabla product_user
         foreach (range(1,10) as $index) {

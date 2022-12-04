@@ -15,8 +15,15 @@ class Product extends Model
     
     public $timestamps = false;
 
+    //Relación N:M -> Un producto puede pertenecer a muchos usuarios (Favoritos)
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    //Relación 1:1 -> Un producto tiene UN archivo
+    public function files()
+    {
+        return $this->hasMany(File::class);
     }
 }

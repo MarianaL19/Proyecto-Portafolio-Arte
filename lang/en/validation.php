@@ -203,7 +203,10 @@ return [
             'max' => 'El :attribute es demasiado largo',
         ],
         'img' => [
-            'max' => 'La extensión de la :attribute es demasiado larga',
+            'required' => 'El producto debe tener una :attribute',
+            'image' => 'El archivo debe ser una :attribute',
+            'mimes' => 'El archivo debe ser de tipo jpg o png',
+            'max' => 'La :attribute es demasiado grande',
         ],
 
     ],
