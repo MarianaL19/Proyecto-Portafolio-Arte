@@ -91,7 +91,7 @@
                     <div class="portfolio-wrap  mb-5">
 
                         @if($product->img == null)
-                            <img src="/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+                            <img src="/img/no-disponible.png" class="img-fluid" alt="">
                         @else
                             <img src="{{ \Storage::url($product->img) }}" class="img-fluid"  alt="">
                         @endif

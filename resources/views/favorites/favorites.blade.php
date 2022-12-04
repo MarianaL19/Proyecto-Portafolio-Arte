@@ -10,7 +10,12 @@
                     @foreach ($products as $product)
                     <div class="col-lg-4 col-md-6 assetsportfolio-item filter-app">
                         <div class="portfolio-wrap mt-3">
-                            <img src="/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+                            @if($product->img == null)
+                                <img src="/img/no-disponible.png" class="img-fluid" alt="">
+                            @else
+                                <img src="{{ \Storage::url($product->img) }}" class="img-fluid"  alt="">
+                            @endif
+
                             <div class="portfolio-info">
                             <a href="/product/{{ $product->id }}" class="portfolio-details-lightbox text-decoration-none" ><h4>{{ $product->title }}</h4></a>
                             <p class="fw-bold">{{ $product->format }}</p>

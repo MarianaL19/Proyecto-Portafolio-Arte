@@ -168,7 +168,7 @@ class CommissionController extends Controller
 
         // Commission:where('id', $commission->id)->update($request->all());
 
-        return redirect('/commission')->with('success','La comisión se ha editado con éxito.');
+        return redirect('/commission')->with('success','La comisión se ha actualizado con éxito.');
     }
 
     /**

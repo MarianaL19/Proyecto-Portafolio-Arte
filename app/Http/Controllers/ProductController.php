@@ -171,7 +171,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('/product')->with('success','El producto se ha editado con éxito.');
+        return redirect('/product')->with('success','El producto se ha actualizado con éxito.');
     }
 
     /**
@@ -195,7 +195,7 @@ class ProductController extends Controller
 
         //Eliminamos el producto
         $product->destroy($product->id);
-        
+
         return redirect('/product')->with('delete','Se ha eliminado el producto.');
     }
 
