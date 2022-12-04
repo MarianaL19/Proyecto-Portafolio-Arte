@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyCommission;
 use App\Models\Commission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class CommissionController extends Controller
 {
@@ -81,7 +83,10 @@ class CommissionController extends Controller
         //Aunque no reciba el id por el formulario, se lo asignamos con "merge"
         $request->merge(['user_id' => Auth::id()]);
 
-        Commission::create($request->all());
+        $commission = Commission::create($request->all());
+
+        //Correo de confirmación de que se creó la comisión
+        Mail::to($commission->user->email)->send(new NotifyCommission($commission));
         
         return redirect('/commission')->with('success','¡Comisión creada exitosamente! :)');
     }
