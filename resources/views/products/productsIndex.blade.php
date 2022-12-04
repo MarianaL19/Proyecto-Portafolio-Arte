@@ -16,10 +16,13 @@
                             <a href="/product/create" class="text-decoration-none text-white">Añadir producto</a>
                         </button>
                     </div>
-                    <div class="col mt-4 mb-3">
-                        <button type="button" class="btn btn-primary rounded py-3 px-4" style="background-color:#b0afaf; border-color:#b0afaf;float:right;">
-                            <a href="/products/trash" class="text-decoration-none text-white">Ir a la Papelera</a>
-                        </button>
+                    <div class="col mt-4">
+                        <form action="/products/trash" method="get">
+                            @csrf
+                            <button type="submit" style="border:none; background:none; color:#818181; font-size:35px; float:right;">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

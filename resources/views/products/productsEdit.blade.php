@@ -12,13 +12,13 @@
                         @error('title')
                         <i class="text-danger">{{ $message }}</i><br>
                         @enderror
-                        <input type="text" name="title" class="form-control" id="title" placeholder="Título del producto" value="{{ $product->title }}">
+                        <input type="text" name="title" required class="form-control" id="title" placeholder="Título del producto" value="{{ $product->title }}">
                     </div>
                     <div class="col-md-6 form-group mt-3 mt-md-0">
                         @error('price')
                         <i class="text-danger">{{ $message }}</i><br>
                         @enderror
-                        <input type="number" class="form-control" name="price" id="price" placeholder="Precio del producto" value={{ $product->price }}>
+                        <input type="number" name="price" required class="form-control" id="price" placeholder="Precio del producto" value={{ $product->price }}>
                     </div>
 
                 </div>
@@ -49,21 +49,15 @@
                         @error('author')
                         <i class="text-danger">{{ $message }}</i><br>
                         @enderror
-                        <input type="text" name="author" class="form-control" id="author" placeholder="Nombre del autor" value={{ $product->author }}>
+                        <input type="text" name="author" required class="form-control" id="author" placeholder="Nombre del autor" value={{ $product->author }}>
                     </div>
-                    {{-- <div class="col-md-6 form-group mt-3 mt-md-0">
-                        @error('author')
-                        <br>
-                        @enderror
-                        <input type="text" name="img" class="form-control" id="img" placeholder="Dirección de la imagen" value={{ $product->img }}>
-                    </div> --}}
                 </div>
 
                 <div class="form-group mt-3">
                     @error('info')
                     <i class="text-danger">{{ $message }}</i><br>
                     @enderror
-                    <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción del producto" >{{ $product->info }}</textarea>
+                    <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción del producto" required>{{ $product->info }}</textarea>
                 </div>
 
                 <div class="form-group mt-3">

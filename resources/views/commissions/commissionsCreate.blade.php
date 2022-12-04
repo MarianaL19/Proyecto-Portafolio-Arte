@@ -10,7 +10,7 @@
                         @error('title')
                         <i class="text-danger">{{ $message }}</i><br>
                         @enderror
-                        <input type="text" name="title" class="form-control" id="title" placeholder="Título de la comisión" value={{ $title ?? old('title') }}>
+                        <input type="text" required name="title" class="form-control" id="title" placeholder="Título de la comisión" value={{ $title ?? old('title') }}>
                     </div>
                     <div class="col-md-6 form-group mt-3 mt-md-0">
                         @error('title')
@@ -43,7 +43,7 @@
                     @error('info')
                     <i class="text-danger">{{ $message }}</i><br>
                     @enderror
-                    <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción" ></textarea>
+                    <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción" required>{{ $info ?? old('info') }}</textarea>
                 </div>
                 
                 <!-- <div class="text-center"><input type="submit" value="Guardar"></div> -->

@@ -10,13 +10,13 @@
                         @error('title')
                         <i class="text-danger">{{ $message }}</i><br>
                         @enderror
-                        <input type="text" name="title" class="form-control" id="title" placeholder="Título del producto" value={{ $title ?? old('title') }}>
+                        <input type="text" name="title" required class="form-control" id="title" placeholder="Título del producto" value={{ $title ?? old('title') }}>
                     </div>
                     <div class="col-md-6 form-group mt-3 mt-md-0">
                         @error('price')
                         <i class="text-danger">{{ $message }}</i><br>
                         @enderror
-                        <input type="number" class="form-control" name="price" id="price" placeholder="Precio del producto" value={{ $price ?? old('price') }}>
+                        <input type="number" name="price" required class="form-control" id="price" placeholder="Precio del producto" value={{ $price ?? old('price') }}>
                     </div>
 
                 </div>
@@ -47,21 +47,15 @@
                         @error('author')
                         <i class="text-danger">{{ $message }}</i><br>
                         @enderror
-                        <input type="text" name="author" class="form-control" id="author" placeholder="Nombre del autor" value={{ $author ?? old('author') }}>
+                        <input type="text" name="author" required class="form-control" id="author" placeholder="Nombre del autor" value={{ $author ?? old('author') }}>
                     </div>
-                    {{-- <div class="col-md-6 form-group mt-3 mt-md-0">
-                        @error('author')
-                        <br>
-                        @enderror
-                        <input type="text" name="img" class="form-control" id="img" placeholder="Dirección de la imagen" value={{ $img ?? old('img') }}>
-                    </div> --}}
                 </div>
 
                 <div class="form-group mt-3">
                     @error('info')
                     <i class="text-danger">{{ $message }}</i><br>
                     @enderror
-                    <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción del producto" >{{ $info ?? old('info') }}</textarea>
+                    <textarea class="form-control" name="info" id="info" rows="5" placeholder="Descripción del producto" required>{{ $info ?? old('info') }}</textarea>
                 </div>
                 
                 
@@ -71,7 +65,7 @@
                     @enderror
                     <fieldset>
                         <label for="img" class="form-label" style="color:rgb(142, 142, 142)">Selecciona una imagen para el producto</label><br>
-                            <input type="file" name="img" id="img">
+                            <input type="file" name="img" id="img" required>
                         <br>
                     </fieldset>
                 </div>
